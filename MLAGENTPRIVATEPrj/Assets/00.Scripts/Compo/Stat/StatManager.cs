@@ -21,7 +21,7 @@ public class StatManager : MonoBehaviour,IGetCompoable
         _parent = entity;
     }
 
-    private void Init()
+    public void Init()
     {
         foreach (StatOverride stat in _stats)
         {
@@ -44,17 +44,9 @@ public class StatManager : MonoBehaviour,IGetCompoable
     private void RemoveTempStat()
     {
         //_modifierDeleteList.
-
         foreach (StatOverride stat in _stats)
         {
-            foreach(SetablePair<StatModifierSO,int> mod in stat.Stat.TempModifilerAndRemain)
-            {
-                mod.Second--;
-                if(mod.Second <= 0)
-                {
-                    stat.Stat.TryRemoveModifier(mod.First);
-                }
-            }
+            stat.Stat.ModifierTurnLoss();
         }
     }
 
@@ -69,6 +61,10 @@ public class StatManager : MonoBehaviour,IGetCompoable
 
     public virtual void AddStatMod(StatModifierSO statMod)
     {
-        GetStat(statMod.TargetStat.StatName).TryAddTemponaryModifiler(statMod);
+        GetStat(statMod.TargetStat.StatName)?.TryAddModifier(statMod);
+    }
+    public virtual void RemoveStatMod(StatModifierSO statMod)
+    {
+        GetStat(statMod.TargetStat.StatName)?.TryAddModifier(statMod);
     }
 }

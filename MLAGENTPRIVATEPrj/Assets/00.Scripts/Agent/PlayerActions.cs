@@ -24,7 +24,7 @@ public class PlayerActions : MonoBehaviour, IGetCompoable,IAfterInitable
     private PlayerAgentManager _agentManager;
 
     private ActCommander _actCommander;
-    private ItemManager[] _itemManager = new ItemManager[2];
+    private ItemManager _itemManager = new();
     [SerializeField]
     private int _currentActType = 0, _currentActIdx = 0;
 
@@ -56,7 +56,6 @@ public class PlayerActions : MonoBehaviour, IGetCompoable,IAfterInitable
     public void AfterInit()
     {
         _agentManager = _parent.GetCompo<PlayerAgentManager>();
-        _itemManager[0] = _parent.GetCompo<ItemManager>();
         _actCommander = _parent.GetCompo<ActCommander>(true);
     }
 
@@ -101,7 +100,7 @@ public class PlayerActions : MonoBehaviour, IGetCompoable,IAfterInitable
     {
         //_itemManager[1] = _agentManager.SelectedUnit().GetCompo<ItemManager>();
 
-        SetAction(Mathf.Abs(((int)dir.y +_currentActType) % 2), ((int)dir.x + _currentActIdx) % (_itemManager[Mathf.Abs(((int)dir.y + _currentActType) % 2)].Items.Count));
+        //SetAction(Mathf.Abs(((int)dir.y +_currentActType) % 2), ((int)dir.x + _currentActIdx) % (_itemManager[Mathf.Abs(((int)dir.y + _currentActType) % 2)].Items.Count));
     }
 
     public void SetCurrentAct()
@@ -111,6 +110,8 @@ public class PlayerActions : MonoBehaviour, IGetCompoable,IAfterInitable
 
     public void SetAction(int type, int idx)
     {
+
+
         _skillAnimator.SetAnim(_cards[type][idx].Act.HashValue);
         _cards[_currentActType][_currentActIdx].OutLineHandle(false);
 
@@ -133,19 +134,19 @@ public class PlayerActions : MonoBehaviour, IGetCompoable,IAfterInitable
         //        _cards[i][j].Init()
         //    }
         //}
-        if (_didStart) //didstart는 2023에 추가된 기능이다.
+        if (_didStart) //didstart는 unity2023+에 추가된 기능이다.
         {
-            _itemManager[1] = _agentManager.SelectedUnit().GetCompo<ItemManager>();
+            _itemManager = _agentManager.SelectedUnit().GetCompo<ItemManager>();
 
             for (int i = 0; i < _cards.Count; i++)
             {
                 for (int j = 0; j < _cards[0].Count; j++)
                 {
-                    bool isExist = _itemManager[i].Items.Count > j;
+                    bool isExist = _itemManager.Items.Count > j;
                     _cards[i][j].SetActive(isExist);
 
                     if (isExist)
-                        _cards[i][j].Init(_itemManager[i].Items[j], j, i);
+                        _cards[i][j].Init(_itemManager.Items[j], j, i);
                 }
             }
 
@@ -169,19 +170,19 @@ public class PlayerActions : MonoBehaviour, IGetCompoable,IAfterInitable
     {
         _skillAnimator.SetAnim("Attack");
 
-            if (_itemManager[_currentActType].Items.Count > 0)
+            if (_itemManager.Items.Count > 0)
             {
                 
-                _itemManager[_currentActType].Items.RemoveAt(_currentActIdx);
+                _itemManager.Items.RemoveAt(_currentActIdx);
                 //List<ActSO> unitOwnList = _agentManager.SelectedUnit().GetCompo<ItemManager>().Items;
 
                 for (int j = 0; j < _cards[_currentActType].Count; j++)
                 {
-                    bool isExist = _itemManager[_currentActType].Items.Count > j;
+                    bool isExist = _itemManager.Items.Count > j;
                     _cards[_currentActType][j].SetActive(isExist);
 
                     if (isExist)
-                        _cards[_currentActType][j].Init(_itemManager[_currentActType].Items[j], j, _currentActType);
+                        _cards[_currentActType][j].Init(_itemManager.Items[j], j, _currentActType);
                 }
 
             }
@@ -204,7 +205,7 @@ public class PlayerActions : MonoBehaviour, IGetCompoable,IAfterInitable
         //}
 
         SetAction(_currentActType, _currentActIdx);
-        if (_itemManager[_currentActType].Items.Count <= 0)
+        if (_itemManager.Items.Count <= 0)
         {
             _actCommander.CurrentAct = null;
         }

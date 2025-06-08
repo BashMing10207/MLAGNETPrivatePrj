@@ -15,7 +15,6 @@ public class AgentManager : MonoBehaviour, IGetCompoable//GetCompoParent // : Ma
 
     public Action<Unit> OnSwapUnit;
 
-
     public UnityEvent OnUnitDieEvent;
     [SerializeField]
     private Unit _unitprefab;

@@ -18,7 +18,7 @@ public class ColliderProjecile : Projectile
         _speedMulti = speedMultif;
 
         _rigidCompo.AddForce(transform.forward*(_speedMulti*_soData.SpeedModifyMulti +_soData.Speed),ForceMode.Impulse);
-        _rigidCompo.AddTorque(new Vector3(1, 0, 0), ForceMode.Impulse);
+        //_rigidCompo.AddTorque(new Vector3(1, 0, 0), ForceMode.Impulse);
         //_rigidCompo.AddTorque(new Vector3(Random.Range(-1,1), Random.Range(-1, 1), Random.Range(-1, 1)),ForceMode.Impulse);
     }
 

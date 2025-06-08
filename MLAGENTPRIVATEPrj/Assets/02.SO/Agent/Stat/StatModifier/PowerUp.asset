@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e993ac18d7764a54f8d32e56079ef934, type: 3}
   m_Name: PowerUp
   m_EditorClassIdentifier: 
-  Icon: {fileID: 0}
+  Icon: {fileID: 2800000, guid: 44bb8d6e57a6ee54d89f9b6bc06ed3f0, type: 3}
   Name: Powerp
   MaxStack: 5
   RemainingTurn: 2

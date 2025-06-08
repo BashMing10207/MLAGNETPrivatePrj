@@ -28,6 +28,7 @@ public abstract class ActSO : ScriptableObject
     public string AnimParamName;
     public int HashValue;
 
+    public bool IsCanActable = true;
 
     public ActType ActTypeEnum;
     public float MaxDistance = 10f;
@@ -36,8 +37,33 @@ public abstract class ActSO : ScriptableObject
 
     public int SKillCoollDown = 1;
 
+    public int SkillNeddPower = 1;
+
+    protected GetCompoParent _parent;
+
     [SerializeField]
     protected StatSO _affectStat;
+
+    public virtual object Clone()
+    {
+        return Instantiate(this); //(아마도)SO를 만들 때 호출하여 기존 값을 복제하는 역할. https://learn.microsoft.com/en-us/dotnet/api/system.icloneable?view=net-9.0 <- (dd)
+    }
+
+    public virtual void Init(GetCompoParent entity)
+    {
+        _parent = entity;
+    }
+
+    public void EnableActExable(bool enable)
+    {
+        IsCanActable = enable;
+    }
+
+    public void ToggleActExable()
+    {
+        IsCanActable = !IsCanActable;
+    }
+
     private void OnValidate()
     {
         HashValue = Animator.StringToHash(AnimParamName);
@@ -51,10 +77,10 @@ public abstract class ActSO : ScriptableObject
         StatSO stat = agent.GetCompo<StatManager>().GetStat(_affectStat.StatName);
         if (stat == null) return 1;
 
-        if(agent.GetType() == typeof(Unit))
-        {
-            return  1+(stat.Value * (agent as Unit).MasterController.GetCompo<StatManager>().GetStat(_affectStat.StatName).Value)*StatModValue;
-        }
+        //if(agent.GetType() == typeof(Unit))
+        //{
+        //    return  1+(stat.Value * (agent as Unit).MasterController.GetCompo<StatManager>().GetStat(_affectStat.StatName).Value)*StatModValue;
+        //}
 
         return stat.Value;
     }

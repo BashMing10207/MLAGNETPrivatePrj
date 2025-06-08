@@ -5,6 +5,14 @@ using UnityEngine;
 
 public class BashUtils
 {
+    public static Quaternion QuatFromV3AndV3(Vector3 a, Vector3 b)
+    {
+        Vector3 crossDIr = Vector3.Cross(a, b);
+        float Betweendegree = Vector3.Angle(a, b);
+        Quaternion velocityRot = new(crossDIr.x * Mathf.Sin(Betweendegree / 2), crossDIr.y * Mathf.Sin(Betweendegree / 2), crossDIr.z * Mathf.Sin(Betweendegree / 2)
+            , Mathf.Cos(Betweendegree / 2));
+        return velocityRot;
+    }
     public static Vector3 V2ToV3(Vector2 v)
     {
         return new Vector3(v.x, 0, v.y);

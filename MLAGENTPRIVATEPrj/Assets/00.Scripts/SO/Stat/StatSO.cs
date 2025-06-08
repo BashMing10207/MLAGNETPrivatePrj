@@ -14,8 +14,8 @@ public class StatSO : ScriptableObject, ICloneable //SO를 생성할때마다 인스턴스 
 
     [SerializeField]
     protected float _baseValue = 1;
-    public List<SetablePair<StatModifierSO, int>> Modifiers = new List<SetablePair<StatModifierSO, int>>();
-    public List<SetablePair<StatModifierSO, int>> TempModifilerAndRemain = new List<SetablePair<StatModifierSO, int>>();
+    public List<StatModifierSO> Modifiers = new List<StatModifierSO>();
+    //public List<SetablePair<StatModifierSO, int>> TempModifilerAndRemain = new List<SetablePair<StatModifierSO, int>>();
     public virtual object Clone()
     {
         return Instantiate(this); //(아마도)SO를 만들 때 호출하여 기존 값을 복제하는 역할. https://learn.microsoft.com/en-us/dotnet/api/system.icloneable?view=net-9.0 <- (dd)
@@ -35,13 +35,19 @@ public class StatSO : ScriptableObject, ICloneable //SO를 생성할때마다 인스턴스 
         {
             foreach (var modifier in Modifiers)
             {
-                if (modifier.First.IsMultiply)
+                switch (modifier.IsMultiply)
                 {
-                    b.Add(modifier.Second);
-                }
-                else
-                {
-                    a += (modifier.Second);
+                    case ModifierType.Multiply:
+                        b.Add(modifier.ModifierValue);
+                        break;
+
+                    case ModifierType.MultiplyAdd:
+                        a += modifier.ModifierValue;
+                        break;
+
+                    case ModifierType.Add:
+
+                        break;
                 }
             }
         }
@@ -59,35 +65,43 @@ public class StatSO : ScriptableObject, ICloneable //SO를 생성할때마다 인스턴스 
     }
     public void TryAddModifier(StatModifierSO mod)
     {
-        foreach (var modifier in Modifiers)
-        {
-            if (modifier.First == mod)
-            {
-                modifier.Second = Mathf.Min(modifier.Second+1,mod.MaxStack);
-                return;
-            }
-        }
-
-        Modifiers.Add(new SetablePair<StatModifierSO, int>(mod , 1));
+        //foreach (var modifier in Modifiers)
+        //{
+        //    //if (modifier == mod)
+        //    //{
+        //    //    modifier.Second = Mathf.Min(modifier.Second+1,mod.MaxStack);
+        //    //    return;
+        //    //}
+        //}
+        Modifiers.Add(mod);
     }
-
-    public void TryAddTemponaryModifiler(StatModifierSO mod)
-    {
-        TryAddModifier(mod);
-        TempModifilerAndRemain.Add(new SetablePair<StatModifierSO, int>(mod, mod.RemainingTurn));
-    }
-
     public void TryRemoveModifier(StatModifierSO mod)
     {
-        foreach (var modifier in Modifiers)
-        {
-            if (modifier.First == mod)
-            {
-                modifier.Second = Mathf.Max(modifier.Second-1,0);
-                return;
-            }
-        }
-
-        Modifiers.Add(new SetablePair<StatModifierSO, int>(mod, 0));
+        //foreach (var modifier in Modifiers)
+        //{
+        //    //if (modifier == mod)
+        //    //{
+        //    //    modifier.Second = Mathf.Min(modifier.Second+1,mod.MaxStack);
+        //    //    return;
+        //    //}
+        //}
+        Modifiers.Remove(mod);
     }
+    //public void TryAddTemponaryModifiler(StatModifierSO mod)
+    //{
+    //    //TryAddModifier(mod);
+    //    TempModifilerAndRemain.Add(new SetablePair<StatModifierSO, int>(mod, mod.RemainingTurn));
+    //}
+
+    public void ModifierTurnLoss()
+    {
+        for (int i = Modifiers.Count; i >0; i--) 
+        {
+            if (Modifiers[i].RemainingTurn > 0)
+                Modifiers[i].RemainingTurn--;
+            if(Modifiers[i].RemainingTurn == 0)
+                Modifiers.Remove(Modifiers[i]);
+        }
+    }
+
 }

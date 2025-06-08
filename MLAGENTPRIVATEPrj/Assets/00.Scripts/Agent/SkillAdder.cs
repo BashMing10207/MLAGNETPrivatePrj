@@ -1,4 +1,3 @@
-
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,8 +18,10 @@ public class SkillAndCool
 public class SkillAdder : MonoBehaviour, IGetCompoable
 {
     private GetCompoParent _playerManager;
+
     //public List<SetablePair<ActSO, int>> AddSkillList = new(); //직렬화가 안되서 디버그 하기 불편한...
     public List<SkillAndCool> AddSkillList = new();
+
     [SerializeField]
     private ActGroupSO _canHaveSkill;
 
@@ -39,7 +40,6 @@ public class SkillAdder : MonoBehaviour, IGetCompoable
         }
     }
 
-
     public void Initialize(GetCompoParent entity)
     {
         _playerManager= entity;
@@ -53,6 +53,7 @@ public class SkillAdder : MonoBehaviour, IGetCompoable
         }
         AddSkillList.Add(new (act,act.SKillCoollDown));
     }
+
     public void SetAddList(ActSO act,int index)
     {
         if (_maxIndex < AddSkillList.Count)

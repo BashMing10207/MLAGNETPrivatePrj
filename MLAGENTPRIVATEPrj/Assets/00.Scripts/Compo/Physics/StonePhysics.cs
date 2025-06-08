@@ -2,20 +2,26 @@ using UnityEngine;
 
 public class StonePhysics : MonoBehaviour, IGetCompoable
 {
-    private Rigidbody _rigidCompo;
+    private Rigidbody _rbCompo;
+    private Collider _collider;
+    private Unit _agent;
+
+    [SerializeField] protected float _limitStepHeight = 0.5f, _maxRayDIstance = 10f, _bodyHeightOffset = 0.42f;
+    [SerializeField] protected Vector3 _rayOffset = new(0f, 6f, 0.5f);
+    [SerializeField] protected LayerMask _gDCheckRayLM; // Ground Check Raycast Layer Mask !
     public void Initialize(GetCompoParent entity)
     {
-        _rigidCompo = entity.GetComponentInChildren<Rigidbody>();
+        _rbCompo = entity.GetComponentInChildren<Rigidbody>();
     }
 
     public void AddForce(Vector3 dir)
     {
-        _rigidCompo.AddForce(dir,ForceMode.Impulse);
+        _rbCompo.AddForce(dir,ForceMode.Impulse);
     }
     
     public void AddForceAt(Vector3 hitpoint, Vector3 dir)
     {
-        _rigidCompo.AddForceAtPosition(dir, hitpoint, ForceMode.Impulse);
+        _rbCompo.AddForceAtPosition(dir, hitpoint, ForceMode.Impulse);
     }
 
 }

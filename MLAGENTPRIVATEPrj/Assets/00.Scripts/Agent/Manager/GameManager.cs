@@ -45,8 +45,4 @@ protected override void Awake()
             TurnEnd();
         }
     }
-    private void FixedUpdate()
-    {
-        
-    }
 }
