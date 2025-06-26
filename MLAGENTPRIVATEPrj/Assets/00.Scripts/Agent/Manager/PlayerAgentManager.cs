@@ -24,7 +24,9 @@ public class PlayerAgentManager : AgentManager,IGetCompoable
     private PlayerInputSO _playerInput;
     public float Upward { get; private set; } = 0;
 
+    public bool IsSelected = false;
 
+    public Action<bool> OnSelectAct;
 
     public override void Initialize(GetCompoParent entity)
     {
@@ -47,11 +49,18 @@ public class PlayerAgentManager : AgentManager,IGetCompoable
         _playerInput.OnClickEnter += HoldStart;
         _playerInput.OnClickExit += HoldEnd;
         _playerInput.OnMouseScroll += Updown;
-        _playerInput.OnClickEnter2 += HoldCancle;
+        _playerInput.DisSelectAct += HoldCancle;
 
-
+        foreach (Unit item in Units)
+            item.Init(_parent);
 
         SwapUnit(0);
+    }
+
+    public void SetActSelected(bool selected)
+    {
+        IsSelected = selected;
+        OnSelectAct?.Invoke(selected);
     }
 
     private void SwapNextUnit(int idx)
@@ -66,7 +75,8 @@ public class PlayerAgentManager : AgentManager,IGetCompoable
 
     private void HoldStart()
     {
-        if (!_parent.GetCompo<PlayerActions>().IsOnPointer)
+        //if (!_parent.GetCompo<PlayerActions>().IsOnPointer)
+        if(IsSelected)
         {
             PostMousePos = _playerInput.MousePos;
             IsHolding = true;
@@ -77,7 +87,7 @@ public class PlayerAgentManager : AgentManager,IGetCompoable
 
     private void Updown(float axis)
     {
-        Upward += axis * Time.deltaTime * 5;
+        //Upward += axis * Time.deltaTime * 5;
     }
 
     private void HoldEnd()
@@ -87,6 +97,7 @@ public class PlayerAgentManager : AgentManager,IGetCompoable
         {
             Vector3 dir = BashUtils.V2ToV3(PostMousePos - _playerInput.MousePos) / Screen.width * _holdMulti;
             GetAction((dir + new Vector3(0, -Upward, 0)).normalized * dir.magnitude);
+            SetActSelected(false);
         }
         IsHolding = false;
 
@@ -96,6 +107,7 @@ public class PlayerAgentManager : AgentManager,IGetCompoable
     private void HoldCancle()
     {
         IsHolding = false;
+        SetActSelected(false);
         EndHold?.Invoke();
     }
 

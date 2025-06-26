@@ -28,15 +28,6 @@ public partial class @Input2: IInputActionCollection2, IDisposable
             ""id"": ""eb396004-5b5a-4aef-9a2b-fd9c6fcfdc00"",
             ""actions"": [
                 {
-                    ""name"": ""Change"",
-                    ""type"": ""Button"",
-                    ""id"": ""3b950b5a-6471-428b-b42e-8c57393f3e75"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""MousePos"",
                     ""type"": ""Value"",
                     ""id"": ""865f5b83-f0a9-4b54-8db5-524df05b4bd0"",
@@ -98,20 +89,18 @@ public partial class @Input2: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""DisSelect"",
+                    ""type"": ""Button"",
+                    ""id"": ""a4890727-13be-4f9e-a703-a3ef17cb1427"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""5dccd5bd-cbe3-4234-ad65-370b3db87a3b"",
-                    ""path"": ""<Keyboard>/tab"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Change"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
                 {
                     ""name"": """",
                     ""id"": ""fcbf5573-03eb-493c-8314-6e761375ce54"",
@@ -230,6 +219,17 @@ public partial class @Input2: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Swap"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9f28d6a6-699c-4e94-abd8-30d3fd7682f6"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DisSelect"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -796,7 +796,6 @@ public partial class @Input2: IInputActionCollection2, IDisposable
 }");
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
-        m_Player_Change = m_Player.FindAction("Change", throwIfNotFound: true);
         m_Player_MousePos = m_Player.FindAction("MousePos", throwIfNotFound: true);
         m_Player_MouseButton = m_Player.FindAction("MouseButton", throwIfNotFound: true);
         m_Player_MouseButton2 = m_Player.FindAction("MouseButton2", throwIfNotFound: true);
@@ -804,6 +803,7 @@ public partial class @Input2: IInputActionCollection2, IDisposable
         m_Player_Scrol = m_Player.FindAction("Scrol", throwIfNotFound: true);
         m_Player_MouseDelta = m_Player.FindAction("MouseDelta", throwIfNotFound: true);
         m_Player_Arrow = m_Player.FindAction("Arrow", throwIfNotFound: true);
+        m_Player_DisSelect = m_Player.FindAction("DisSelect", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -885,7 +885,6 @@ public partial class @Input2: IInputActionCollection2, IDisposable
     // Player
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
-    private readonly InputAction m_Player_Change;
     private readonly InputAction m_Player_MousePos;
     private readonly InputAction m_Player_MouseButton;
     private readonly InputAction m_Player_MouseButton2;
@@ -893,11 +892,11 @@ public partial class @Input2: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Scrol;
     private readonly InputAction m_Player_MouseDelta;
     private readonly InputAction m_Player_Arrow;
+    private readonly InputAction m_Player_DisSelect;
     public struct PlayerActions
     {
         private @Input2 m_Wrapper;
         public PlayerActions(@Input2 wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Change => m_Wrapper.m_Player_Change;
         public InputAction @MousePos => m_Wrapper.m_Player_MousePos;
         public InputAction @MouseButton => m_Wrapper.m_Player_MouseButton;
         public InputAction @MouseButton2 => m_Wrapper.m_Player_MouseButton2;
@@ -905,6 +904,7 @@ public partial class @Input2: IInputActionCollection2, IDisposable
         public InputAction @Scrol => m_Wrapper.m_Player_Scrol;
         public InputAction @MouseDelta => m_Wrapper.m_Player_MouseDelta;
         public InputAction @Arrow => m_Wrapper.m_Player_Arrow;
+        public InputAction @DisSelect => m_Wrapper.m_Player_DisSelect;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -914,9 +914,6 @@ public partial class @Input2: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_PlayerActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_PlayerActionsCallbackInterfaces.Add(instance);
-            @Change.started += instance.OnChange;
-            @Change.performed += instance.OnChange;
-            @Change.canceled += instance.OnChange;
             @MousePos.started += instance.OnMousePos;
             @MousePos.performed += instance.OnMousePos;
             @MousePos.canceled += instance.OnMousePos;
@@ -938,13 +935,13 @@ public partial class @Input2: IInputActionCollection2, IDisposable
             @Arrow.started += instance.OnArrow;
             @Arrow.performed += instance.OnArrow;
             @Arrow.canceled += instance.OnArrow;
+            @DisSelect.started += instance.OnDisSelect;
+            @DisSelect.performed += instance.OnDisSelect;
+            @DisSelect.canceled += instance.OnDisSelect;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
         {
-            @Change.started -= instance.OnChange;
-            @Change.performed -= instance.OnChange;
-            @Change.canceled -= instance.OnChange;
             @MousePos.started -= instance.OnMousePos;
             @MousePos.performed -= instance.OnMousePos;
             @MousePos.canceled -= instance.OnMousePos;
@@ -966,6 +963,9 @@ public partial class @Input2: IInputActionCollection2, IDisposable
             @Arrow.started -= instance.OnArrow;
             @Arrow.performed -= instance.OnArrow;
             @Arrow.canceled -= instance.OnArrow;
+            @DisSelect.started -= instance.OnDisSelect;
+            @DisSelect.performed -= instance.OnDisSelect;
+            @DisSelect.canceled -= instance.OnDisSelect;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1119,7 +1119,6 @@ public partial class @Input2: IInputActionCollection2, IDisposable
     public UIActions @UI => new UIActions(this);
     public interface IPlayerActions
     {
-        void OnChange(InputAction.CallbackContext context);
         void OnMousePos(InputAction.CallbackContext context);
         void OnMouseButton(InputAction.CallbackContext context);
         void OnMouseButton2(InputAction.CallbackContext context);
@@ -1127,6 +1126,7 @@ public partial class @Input2: IInputActionCollection2, IDisposable
         void OnScrol(InputAction.CallbackContext context);
         void OnMouseDelta(InputAction.CallbackContext context);
         void OnArrow(InputAction.CallbackContext context);
+        void OnDisSelect(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

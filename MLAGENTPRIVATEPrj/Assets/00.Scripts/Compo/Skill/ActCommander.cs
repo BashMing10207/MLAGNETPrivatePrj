@@ -11,11 +11,7 @@ public class ActCommander : MonoBehaviour,IGetCompoable,IAfterInitable
     //public float ActionPoint = 10f;
     public int ActionPoint = 3;
 
-    public Action ActFail;
 
-    public ActSO CurrentAct;
-
-    public UnityEvent OnActChangeEvent,OnActRunEvent;
     public void Initialize(GetCompoParent entity)
     {
         _manager = entity;
@@ -28,23 +24,22 @@ public class ActCommander : MonoBehaviour,IGetCompoable,IAfterInitable
         _agentManager = _manager.GetCompo<AgentManager>(true);
     }
 
-    public void TrySkill(Vector3 dir, ActSO act)
+    public void TrySkill(Vector3 dir)
     {
         if(ActionPoint <=0)
         {
 
         }
 
-        ActionPoint = Mathf.Clamp(ActionPoint - act.CostPoints,0,999);
+        //ActionPoint = Mathf.Clamp(ActionPoint - act.CostPoints,0,999);
 
-        float power = Mathf.Clamp(dir.magnitude + act.MinPower, 0f, Mathf.Min(ActionPoint, act.MaxPower));
+        //float power = Mathf.Clamp(dir.magnitude + act.MinPower, 0f, Mathf.Min(ActionPoint, act.MaxPower));
 
         // if (power < act.MinCost)
         //{
         //    ActFail?.Invoke();
         //    return;
         //}
-        OnActRunEvent?.Invoke(); 
         //_manager.GetCompo<SkillAnimator>().SetAnim(act.HashValue);
         //_manager.GetCompo<SkillAnimator>().SetAnim("Attack");
         //_manager.GetCompo<PlayerActions>().AttackAnim();
@@ -56,7 +51,7 @@ public class ActCommander : MonoBehaviour,IGetCompoable,IAfterInitable
         else if (_agentManager.Units.Count >= _agentManager.SelectedUnitIdx)
         {
 
-            _agentManager.SelectedUnit().GetCompo<AgentActCommander>().ExecuteAct(act, dir.normalized * power);
+            _agentManager.SelectedUnit().GetCompo<AgentActCommander>().ExecuteAct(dir);
 
         }
        else
@@ -71,18 +66,18 @@ public class ActCommander : MonoBehaviour,IGetCompoable,IAfterInitable
         }
     }
 
-    public void TrySkill(Vector3 dir)
-    {
-        ActSO act = CurrentAct;
-        TrySkill(dir, act);
-    }
+    //public void TrySkill(Vector3 dir)
+    //{
+    //    //ActSO act = CurrentAct;
+    //    TrySkill(dir, act);
+    //}
 
-    public void SetAct(ActSO act)
-    {
-        CurrentAct = act;
+    //public void SetAct(ActSO act)
+    //{
+    //    //CurrentAct = act;
 
-        OnActChangeEvent?.Invoke();
-    }
+    //    //OnActChangeEvent?.Invoke();
+    //}
 
 
 }

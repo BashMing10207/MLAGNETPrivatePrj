@@ -17,6 +17,7 @@ public class PlayerInputSO : ScriptableObject, Input2.IPlayerActions, Input2.IUI
     public event Action OnClickExit2;
     public event Action<float> OnMouseScroll;
     public event Action<Vector2> Arrow;
+    public event Action DisSelectAct;
     public bool IsPressing = false;
     public bool IsPressing2 = false;
     public Vector2 InputDirection { get; private set; }
@@ -188,5 +189,10 @@ public class PlayerInputSO : ScriptableObject, Input2.IPlayerActions, Input2.IUI
     public void OnArrow(InputAction.CallbackContext context)
     {
         Arrow?.Invoke(context.ReadValue<Vector2>());
+    }
+
+    public void OnDisSelect(InputAction.CallbackContext context)
+    {
+        DisSelectAct?.Invoke();
     }
 }

@@ -111,9 +111,11 @@ public class EnemyController : MonoBehaviour, IGetCompoable, IAfterInitable
 
     public void RunAction()
     {
-        _commander.SetAct(CurrentAct);
         _enemyAgentManager.SelectedUnitIdx = _enemyAgentManager.Units.IndexOf(SelectedUnit);
-        _commander.TrySkill(ActDir, CurrentAct);
+        //_commander.SetAct(CurrentAct);
+        //_commander.TrySkill(ActDir, CurrentAct);
+        SelectedUnit.GetCompo<AgentActCommander>().CurrentAct = CurrentAct;
+        SelectedUnit.GetCompo<AgentActCommander>().ExecuteAct(ActDir);
         //CurrentAct.RunAct(ActDir, SelectedUnit);
     }
 
@@ -143,7 +145,8 @@ public class EnemyController : MonoBehaviour, IGetCompoable, IAfterInitable
 
                 //    break;
         }
-        _commander.SetAct(CurrentAct);
+        //_commander.SetAct(CurrentAct);
+        SelectedUnit.GetCompo<AgentActCommander>().CurrentAct = CurrentAct;
 
         print(canUse);
 

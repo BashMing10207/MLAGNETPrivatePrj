@@ -14,7 +14,7 @@ public class CollisonDamageCaster : DamageCaster, IGetCompoable
 
     private void OnCollisionEnter(Collision collision)
     {
-        float damage = Vector3.Project(_rbCompo.velocity, (transform.position - collision.transform.position)).magnitude; //* damageMultifieler
+        float damage = Vector3.Project(_rbCompo.linearVelocity, (transform.position - collision.transform.position)).magnitude; //* damageMultifieler
 
         DamageCast(collision.gameObject,  damage);
     }

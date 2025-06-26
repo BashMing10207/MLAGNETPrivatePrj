@@ -45,9 +45,9 @@ public class NoSuperJump : MonoBehaviour,IGetCompoable
     {
         if(_isSnapEnable)
         {
-            Quaternion velocityRot = BashUtils.QuatFromV3AndV3(Vector3.forward, _rbCompo.velocity);
+            Quaternion velocityRot = BashUtils.QuatFromV3AndV3(Vector3.forward, _rbCompo.linearVelocity);
 
-            if (Physics.Raycast(_agent.transform.position + _rbCompo.velocity * Time.fixedDeltaTime + _rayOffset, Vector3.down, out RaycastHit hit, _maxRayDIstance, _gDCheckRayLM))
+            if (Physics.Raycast(_agent.transform.position + _rbCompo.linearVelocity * Time.fixedDeltaTime + _rayOffset, Vector3.down, out RaycastHit hit, _maxRayDIstance, _gDCheckRayLM))
             {
 
                 float stepHeight = hit.point.y + _bodyHeightOffset - _agent.transform.position.y;
@@ -55,9 +55,15 @@ public class NoSuperJump : MonoBehaviour,IGetCompoable
                 {
                     _agent.transform.position = new(_agent.transform.position.x, hit.point.y + _bodyHeightOffset, _agent.transform.position.z);
                 }
+                _rbCompo.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
 
 
             }
+            else
+            {
+                _rbCompo.constraints = RigidbodyConstraints.FreezeRotation;
+            }
         }
+
     }
 }

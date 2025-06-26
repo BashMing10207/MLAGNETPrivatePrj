@@ -6,15 +6,6 @@
             "id": "eb396004-5b5a-4aef-9a2b-fd9c6fcfdc00",
             "actions": [
                 {
-                    "name": "Change",
-                    "type": "Button",
-                    "id": "3b950b5a-6471-428b-b42e-8c57393f3e75",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "MousePos",
                     "type": "Value",
                     "id": "865f5b83-f0a9-4b54-8db5-524df05b4bd0",
@@ -76,20 +67,18 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "DisSelect",
+                    "type": "Button",
+                    "id": "a4890727-13be-4f9e-a703-a3ef17cb1427",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
-                {
-                    "name": "",
-                    "id": "5dccd5bd-cbe3-4234-ad65-370b3db87a3b",
-                    "path": "<Keyboard>/tab",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Change",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "",
                     "id": "fcbf5573-03eb-493c-8314-6e761375ce54",
@@ -208,6 +197,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Swap",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9f28d6a6-699c-4e94-abd8-30d3fd7682f6",
+                    "path": "<Keyboard>/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DisSelect",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

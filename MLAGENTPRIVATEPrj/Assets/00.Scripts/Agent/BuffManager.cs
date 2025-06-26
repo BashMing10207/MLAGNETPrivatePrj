@@ -30,7 +30,7 @@ public class BuffManager : MonoBehaviour, IGetCompoable
         //_modifierDeleteList.
         foreach (BuffSO buff in _buffs)
         {
-            buff.TurnEffect();
+            buff.TurnEffect(_parent);
         }
     }
 

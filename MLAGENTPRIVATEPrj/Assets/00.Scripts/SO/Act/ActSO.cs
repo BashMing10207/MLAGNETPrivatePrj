@@ -37,7 +37,7 @@ public abstract class ActSO : ScriptableObject
 
     public int SKillCoollDown = 1;
 
-    public int SkillNeddPower = 1;
+    public int SkillNeedPower = 1;
 
     protected GetCompoParent _parent;
 

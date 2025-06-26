@@ -352,9 +352,6 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -427,6 +424,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WeaponTrm: {fileID: 2688026428773022592}
+  ActPoint: 0
+  CurrentAct: {fileID: 0}
+  OnActChangeEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnActRunEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &8330426834645569423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -441,6 +446,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Items:
   - {fileID: 11400000, guid: f8d2b71adbf465b4a85489f746a92918, type: 2}
+  Skills: []
 --- !u!114 &6912691985607457959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -457,6 +463,7 @@ MonoBehaviour:
   - First: {fileID: 0}
     Second: 0
   _canHaveSkill: {fileID: 11400000, guid: 8c7fffa4432f88647889b6aaf5495cd8, type: 2}
+  _maxIndex: 25
 --- !u!1 &1249270618999402024
 GameObject:
   m_ObjectHideFlags: 0
@@ -518,9 +525,6 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -678,8 +682,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsSelected: 0
-  _isSelectedObj: {fileID: 1027991763524397339}
-  _isDisabledObj: {fileID: 0}
+  _isSelectedObj:
+  - {fileID: 1027991763524397339}
+  _isDisabledObj: []
   ViewPivot: {fileID: 686244401108648366}
   WeaponTrm: {fileID: 2688026428773022592}
   MasterController: {fileID: 0}
@@ -1043,17 +1048,15 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 1
+  m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 0
-  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
-  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -1224,6 +1227,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91b46819450d09843930b7228eb669b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _limitStepHeight: 0.5
+  _maxRayDIstance: 10
+  _bodyHeightOffset: 0.42
+  _rayOffset: {x: 0, y: 6, z: 0.5}
+  _gDCheckRayLM:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &1897156264344823345
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1236,9 +1246,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce8a73da82b73654ca2abaaab96faeb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _limitVelocity: 1
-  _divimod: 1.5
-  _maxDistance: 0.41
+  _limitStepHeight: 0.5
+  _maxRayDIstance: 10
+  _bodyHeightOffset: 0.42
+  _rayOffset: {x: 0, y: 6, z: 0.5}
+  _gDCheckRayLM:
+    serializedVersion: 2
+    m_Bits: 0
+  _isSnapEnable: 1
 --- !u!1 &3880126136383672453
 GameObject:
   m_ObjectHideFlags: 0
@@ -1662,9 +1677,6 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1820,9 +1832,6 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -6665,9 +6674,6 @@ ParticleSystemRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:

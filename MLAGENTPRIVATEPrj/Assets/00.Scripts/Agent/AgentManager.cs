@@ -22,17 +22,18 @@ public class AgentManager : MonoBehaviour, IGetCompoable//GetCompoParent // : Ma
     public virtual void Initialize(GetCompoParent entity)
     {
         _parent = entity;
-        print(entity.gameObject.name);
-    }
-
-    protected virtual void Start()
-    {
-        //Units.ForEach(unit => unit.Init(_parent));
+        //print(entity.gameObject.name);
         foreach (Unit unit in Units)
         {
             unit.Init(_parent);
 
         }
+    }
+
+    protected virtual void Start()
+    {
+        //Units.ForEach(unit => unit.Init(_parent));
+
     }
     public Unit SelectedUnit() => Units[SelectedUnitIdx];
     protected virtual void GetAction(Vector3 dir)

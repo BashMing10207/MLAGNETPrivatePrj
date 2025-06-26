@@ -10,7 +10,7 @@ public class PlayerActions : MonoBehaviour, IGetCompoable,IAfterInitable
 {
     [SerializeField]
     private ToolTip _toolTip;
-    private List<List<UICards>> _cards = new List<List<UICards>>();
+    private List<List<UIACTCard>> _cards = new List<List<UIACTCard>>();
 
     [SerializeField]
     private List<RefreshableLayout> _cardParents = new List<RefreshableLayout>();
@@ -46,7 +46,7 @@ public class PlayerActions : MonoBehaviour, IGetCompoable,IAfterInitable
 
         for (int i = 0; i < _cardParents.Count; i++)
         {
-            _cards.Add(_cardParents[i].GetComponentsInChildren<UICards>().ToList());
+            _cards.Add(_cardParents[i].GetComponentsInChildren<UIACTCard>().ToList());
         }
         GameManager.Instance.PlayerInputSO.Arrow += Arrow;
 
@@ -88,12 +88,12 @@ public class PlayerActions : MonoBehaviour, IGetCompoable,IAfterInitable
 
     private void SetTrm()
     {
-        Vector3 rot = _parent.GetCompo<CameraManager>().MainCamera1.transform.eulerAngles;
-        Vector3 dir = Quaternion.Euler(0, rot.y, 0) * (BashUtils.V2ToV3(_agentManager.PostMousePos - Mouse.current.position.value).normalized);
-        //_skillAnimator.transform.SetPositionAndRotation(_parent.SelectedUnit().WeaponTrm.position ,Quaternion.FromToRotation(Vector3.forward, dir));
-        _skillAnimator.transform.position = _agentManager.SelectedUnit().WeaponTrm.position;
-        _skillAnimator.transform.localScale = Vector3.one * _agentManager.SelectedUnit().WeaponTrm.lossyScale.x;
-        _skillAnimator.transform.rotation = Quaternion.Lerp(_skillAnimator.transform.rotation, Quaternion.FromToRotation(Vector3.forward, dir), 0.45f);
+    //    Vector3 rot = _parent.GetCompo<CameraManager>().MainCamera1.transform.eulerAngles;
+    //    Vector3 dir = Quaternion.Euler(0, rot.y, 0) * (BashUtils.V2ToV3(_agentManager.PostMousePos - Mouse.current.position.value).normalized);
+    //    //_skillAnimator.transform.SetPositionAndRotation(_parent.SelectedUnit().WeaponTrm.position ,Quaternion.FromToRotation(Vector3.forward, dir));
+    //    _skillAnimator.transform.position = _agentManager.SelectedUnit().WeaponTrm.position;
+    //    _skillAnimator.transform.localScale = Vector3.one * _agentManager.SelectedUnit().WeaponTrm.lossyScale.x;
+    //    _skillAnimator.transform.rotation = Quaternion.Lerp(_skillAnimator.transform.rotation, Quaternion.FromToRotation(Vector3.forward, dir), 0.45f);
     }
 
     private void Arrow(Vector2 dir)
@@ -118,7 +118,7 @@ public class PlayerActions : MonoBehaviour, IGetCompoable,IAfterInitable
         _currentActType = type;
         _currentActIdx = idx;
 
-        _actCommander.SetAct(_cards[type][idx].Act);
+        //_actCommander.SetAct(_cards[type][idx].Act);
         _cards[type][idx].OutLineHandle(true);
 
         _cardParents[0].Refresh();
@@ -207,7 +207,7 @@ public class PlayerActions : MonoBehaviour, IGetCompoable,IAfterInitable
         SetAction(_currentActType, _currentActIdx);
         if (_itemManager.Items.Count <= 0)
         {
-            _actCommander.CurrentAct = null;
+            //_actCommander.CurrentAct = null;
         }
     }
 

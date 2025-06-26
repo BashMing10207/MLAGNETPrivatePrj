@@ -37,7 +37,7 @@ public class BuffSO : ScriptableObject
         StatBuff();
     }
 
-    public virtual void TurnEffect()
+    public virtual void TurnEffect(GetCompoParent entity)
     {
 
         RemainingTurn--;
@@ -50,6 +50,7 @@ public class BuffSO : ScriptableObject
 
     public virtual void RemoveBuff()
     {
+        //when Buff ENd
         TargetBuffManager.RemoveBuff(this);
     }
 

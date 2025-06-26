@@ -1,10 +1,11 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Unit : Agent
 {
 
     public bool IsSelected = false;
-    [SerializeField] private GameObject _isSelectedObj, _isDisabledObj;
+    [SerializeField] private List<GameObject> _isSelectedObj, _isDisabledObj = new();
     public Transform ViewPivot;
     public Transform WeaponTrm;
     public GetCompoParent MasterController;
@@ -18,9 +19,11 @@ public class Unit : Agent
     {
         IsSelected = enable;
         if(_isSelectedObj != null)
-        _isSelectedObj.SetActive(enable);
+            foreach(var obj in _isSelectedObj)
+                obj.SetActive(enable);
         if(_isDisabledObj != null)
-        _isDisabledObj.SetActive(!enable);
+            foreach(var obj in _isDisabledObj)
+                obj.SetActive(!enable);
     }
 }
 

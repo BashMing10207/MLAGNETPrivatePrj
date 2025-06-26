@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class AgentActCommander : MonoBehaviour, IGetCompoable
 {
@@ -9,7 +11,13 @@ public class AgentActCommander : MonoBehaviour, IGetCompoable
 
     private StatManager _statManager;
 
-    public int actPoint = 0;
+    public int ActPoint = 0;
+
+    public Action ActFail;
+
+    public ActSO CurrentAct;
+
+    public UnityEvent OnActChangeEvent, OnActRunEvent;
 
     public void Initialize(GetCompoParent entity)
     {
@@ -17,13 +25,24 @@ public class AgentActCommander : MonoBehaviour, IGetCompoable
         _statManager = entity.GetCompo<StatManager>();
     }
 
-    public void ExecuteAct(ActSO act, Vector3 dir)
+    public void ExecuteAct(Vector3 dir)
     {
-        if(actPoint - act.SkillNeddPower >0)
+
+
+        if(CurrentAct.IsCanActable)
+        if (ActPoint - CurrentAct.SkillNeedPower >=0)
         {
-            actPoint -= act.SkillNeddPower;
-            act.RunAct(dir,_agent);
+            //ActPoint -= CurrentAct.SkillNeedPower;
+            ActPoint = Mathf.Clamp(ActPoint - CurrentAct.CostPoints, 0, 999);
+
+            float power = Mathf.Clamp(dir.magnitude + CurrentAct.MinPower, 0f, Mathf.Min(ActPoint, CurrentAct.MaxPower));
+
+            CurrentAct.RunAct(dir.normalized * power,_agent);
+
+            OnActRunEvent?.Invoke();
         }
     }
+
+
 
 }
