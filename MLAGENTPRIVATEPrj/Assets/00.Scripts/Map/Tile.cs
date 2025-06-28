@@ -18,7 +18,7 @@ public class Tile : DamageCaster
 
     private void Awake()
     {
-        _meshRenderer = GetComponent<MeshRenderer>();
+        _meshRenderer = GetComponentInChildren<MeshRenderer>();
     }
     public void ChangeTile(TileType type)
     {

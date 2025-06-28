@@ -100,7 +100,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _1_2: 0.47
+    - _1_2: 0.206
     - _AlphaClip: 0
     - _AlphaToMask: 0
     - _Blend: 0
@@ -109,7 +109,7 @@ Material:
     - _CastShadows: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
-    - _ColorPower: 0.1
+    - _ColorPower: 0.4
     - _Cull: 2
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
@@ -121,7 +121,7 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Metallic: 0.1
-    - _Ming: 20
+    - _Ming: 35
     - _Normal: 0.92
     - _OcclusionStrength: 1
     - _Parallax: 0.005
@@ -136,8 +136,8 @@ Material:
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
     - _Surface: 0
-    - _Tile1: 13
-    - _Tile1_1: 5
+    - _Tile1: 25
+    - _Tile1_1: 10
     - _WorkflowMode: 1
     - _ZTest: 4
     - _ZWrite: 1

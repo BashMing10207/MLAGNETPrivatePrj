@@ -17,7 +17,8 @@ Material:
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
-  stringTagMap: {}
+  stringTagMap:
+    RenderType: Opaque
   disabledShaderPasses:
   - MOTIONVECTORS
   m_LockedProperties: 
@@ -86,15 +87,16 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _1_2: 0.283
+    - _1_2: 0.406
     - _AlphaClip: 0
     - _AlphaToMask: 0
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
     - _BumpScale: 1
+    - _CastShadows: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
-    - _ColorPower: 0.7
+    - _ColorPower: 0.5
     - _Cull: 2
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
@@ -108,15 +110,15 @@ Material:
     - _GlossyReflections: 0
     - _Metallic: 0.8
     - _Ming: 5
-    - _Normal: 0
+    - _Normal: 4
     - _OcclusionStrength: 1
     - _Parallax: 0.005
-    - _Power: 3
+    - _Power: 2
     - _Power2: 1
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _SUrfacePower: 0.04
+    - _SUrfacePower: 0.2
     - _Smoothness: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -125,10 +127,12 @@ Material:
     - _Surface: 0
     - _SurfaceAdd: 0
     - _SurfaceNoise_TIle: 25
-    - _Tile1: 70
-    - _Tile1_1: 80
+    - _Tile1: 2
+    - _Tile1_1: 5
     - _WorkflowMode: 1
+    - _ZTest: 4
     - _ZWrite: 1
+    - _ZWriteControl: 0
     m_Colors:
     - _BaseColor: {r: 0.6603774, g: 0.589653, b: 0.49216804, a: 1}
     - _Color: {r: 0.6603774, g: 0.589653, b: 0.49216804, a: 1}

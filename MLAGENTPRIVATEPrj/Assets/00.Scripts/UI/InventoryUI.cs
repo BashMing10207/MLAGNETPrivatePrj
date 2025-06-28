@@ -33,13 +33,14 @@ public class InventoryUI : MonoBehaviour,IGetCompoable,IAfterInitable
     private bool _isEnabled = true;
 
 
-    private bool _didStart = false;
+    //private bool _didStart = false;
 
     private void Start()
     {
         GameManager.Instance.OnTurnEndEvent += Init;
+        Init();
         _manager = (_parent as Unit).MasterController.GetCompo<AgentManager>(true) as PlayerAgentManager;
-        _didStart = true;
+        //_didStart = true;
 
         _manager.OnSelectAct += SetVisibilityBySelected;
     }
@@ -163,14 +164,14 @@ public class InventoryUI : MonoBehaviour,IGetCompoable,IAfterInitable
         //        _cards[i][j].Init()
         //    }
         //}
-        if (_didStart) //didstart는 unity2023+에 추가된 기능이다.
+        if (didStart) //didstart는 unity2023+에 추가된 기능이다.
         {
 
             for (int i = 0; i < _cards.Count; i++)
             {
-                for (int j = 0; j < _cards[0].Count; j++)
+                for (int j = 0; j < _cards[i].Count; j++)
                 {
-                    bool isExist = _itemManager.Items.Count > j;
+                    bool isExist = (i == 1 ? _itemManager.Skills : _itemManager.Items).Count > j;
                     _cards[i][j].SetActive(isExist);
 
                     if (isExist)

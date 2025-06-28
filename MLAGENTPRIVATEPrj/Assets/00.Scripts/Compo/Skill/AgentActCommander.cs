@@ -35,9 +35,9 @@ public class AgentActCommander : MonoBehaviour, IGetCompoable
             //ActPoint -= CurrentAct.SkillNeedPower;
             ActPoint = Mathf.Clamp(ActPoint - CurrentAct.CostPoints, 0, 999);
 
-            float power = Mathf.Clamp(dir.magnitude + CurrentAct.MinPower, 0f, Mathf.Min(ActPoint, CurrentAct.MaxPower));
+            //float power = Mathf.Clamp(dir.magnitude + CurrentAct.MinPower, 0f, Mathf.Min(ActPoint, CurrentAct.MaxPower));
 
-            CurrentAct.RunAct(dir.normalized * power,_agent);
+            CurrentAct.RunAct(dir,_agent);
 
             OnActRunEvent?.Invoke();
         }

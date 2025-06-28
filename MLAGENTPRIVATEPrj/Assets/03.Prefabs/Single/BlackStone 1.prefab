@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95e8f299acf156e40bb7a7714fcf4f22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isBlack: 0
 --- !u!1 &674459040361722358
 GameObject:
   m_ObjectHideFlags: 0
@@ -4908,6 +4909,9 @@ ParticleSystemRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -5029,7 +5033,6 @@ GameObject:
   m_Component:
   - component: {fileID: 420992588000295730}
   - component: {fileID: 218241827647538801}
-  - component: {fileID: 6048124586623593839}
   m_Layer: 0
   m_Name: BlackStone 1
   m_TagString: Hitable
@@ -5081,23 +5084,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &6048124586623593839
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3720406125307168743}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0fca3a695564c24daf005a821e73570, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _dir: {x: 2000, y: 0, z: 0}
-  _isRight: 0
-  _isSelectd: 0
-  _rb: {fileID: 218241827647538801}
-  _gravitry: 4000
 --- !u!1 &4637829643160241551
 GameObject:
   m_ObjectHideFlags: 0
@@ -5266,6 +5252,9 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -5340,7 +5329,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 13aad15c33c7efa4a960ad31c4618c3f, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 1c134cc94aa70c14e81d4d94a1f580f4, type: 2}
     - target: {fileID: 919132149155446097, guid: 13aad15c33c7efa4a960ad31c4618c3f, type: 3}

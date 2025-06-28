@@ -41,29 +41,29 @@ public class NoSuperJump : MonoBehaviour,IGetCompoable
         _isSnapEnable=isSnapEnabled;
     }
 
-    private void FixedUpdate()
-    {
-        if(_isSnapEnable)
-        {
-            Quaternion velocityRot = BashUtils.QuatFromV3AndV3(Vector3.forward, _rbCompo.linearVelocity);
+    //private void FixedUpdate()
+    //{
+    //    if(_isSnapEnable)
+    //    {
+    //        Quaternion velocityRot = BashUtils.QuatFromV3AndV3(Vector3.forward, _rbCompo.linearVelocity);
 
-            if (Physics.Raycast(_agent.transform.position + _rbCompo.linearVelocity * Time.fixedDeltaTime + _rayOffset, Vector3.down, out RaycastHit hit, _maxRayDIstance, _gDCheckRayLM))
-            {
+    //        if (Physics.Raycast(_agent.transform.position + _rbCompo.linearVelocity * Time.fixedDeltaTime + _rayOffset, Vector3.down, out RaycastHit hit, _maxRayDIstance, _gDCheckRayLM))
+    //        {
 
-                float stepHeight = hit.point.y + _bodyHeightOffset - _agent.transform.position.y;
-                if (stepHeight < _limitStepHeight)
-                {
-                    _agent.transform.position = new(_agent.transform.position.x, hit.point.y + _bodyHeightOffset, _agent.transform.position.z);
-                }
-                _rbCompo.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
+    //            float stepHeight = hit.point.y + _bodyHeightOffset - _agent.transform.position.y;
+    //            if (stepHeight < _limitStepHeight)
+    //            {
+    //                _agent.transform.position = new(_agent.transform.position.x, hit.point.y + _bodyHeightOffset, _agent.transform.position.z);
+    //            }
+    //            //_rbCompo.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
 
 
-            }
-            else
-            {
-                _rbCompo.constraints = RigidbodyConstraints.FreezeRotation;
-            }
-        }
+    //        }
+    //        else
+    //        {
+    //            //_rbCompo.constraints = RigidbodyConstraints.FreezeRotation;
+    //        }
+    //    }
 
-    }
+    //}
 }
