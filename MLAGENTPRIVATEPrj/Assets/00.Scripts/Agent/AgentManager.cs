@@ -36,7 +36,7 @@ public class AgentManager : MonoBehaviour, IGetCompoable//GetCompoParent // : Ma
 
     }
     public Unit SelectedUnit() => Units[SelectedUnitIdx];
-    protected virtual void GetAction(Vector3 dir)
+    protected virtual void RunAction(Vector3 dir)
     {
         ActionExcutor?.Invoke(dir);
     }

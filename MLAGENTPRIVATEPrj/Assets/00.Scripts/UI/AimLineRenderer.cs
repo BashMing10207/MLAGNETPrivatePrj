@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 public class AimLineRenderer : MonoBehaviour, IGetCompoable,IAfterInitable
 {
-    private Player _playerManager;
+    private UserPlayer _playerManager;
     private PlayerAgentManager _agentManager;
     [SerializeField]
     private LineRenderer _lineRenderer;
@@ -12,27 +12,27 @@ public class AimLineRenderer : MonoBehaviour, IGetCompoable,IAfterInitable
     private float _sizeMulti=15;
     public void Initialize(GetCompoParent entity)
     {
-        _playerManager = entity as Player;
+        _playerManager = entity as UserPlayer;
     }
     public void AfterInit()
     {
         _agentManager = _playerManager.GetCompo<PlayerAgentManager>();
     }
 
-    private void Update()
-    {
-        _lineRenderer.enabled = false;
-        if (GameManager.Instance.IsPlayerturn)
-        {
-            if (_agentManager.IsHolding)
-            {
-                LineRender();
+    //private void Update()
+    //{
+    //    _lineRenderer.enabled = false;
+    //    if (GameManager.Instance.IsPlayerturn)
+    //    {
+    //        if (_agentManager.IsHolding)
+    //        {
+    //            LineRender();
 
-            }
-        }
-    }
+    //        }
+    //    }
+    //}
 
-    private void LineRender()
+    public void LineRender()
     {
         //if(Physics.Raycast(Camera.main.ViewportPointToRay(_playerManager.PostMousePos),out RaycastHit hit))
         //{

@@ -1,7 +1,4 @@
-using System;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.InputSystem;
 
 public class ActCommander : MonoBehaviour,IGetCompoable,IAfterInitable
 {
@@ -51,8 +48,8 @@ public class ActCommander : MonoBehaviour,IGetCompoable,IAfterInitable
         else if (_agentManager.Units.Count >= _agentManager.SelectedUnitIdx)
         {
 
-            _agentManager.SelectedUnit().GetCompo<AgentActCommander>().ExecuteAct(dir);
 
+            _agentManager.SelectedUnit().GetCompo<AgentActCommander>().ExecuteAct(dir);
         }
        else
         {

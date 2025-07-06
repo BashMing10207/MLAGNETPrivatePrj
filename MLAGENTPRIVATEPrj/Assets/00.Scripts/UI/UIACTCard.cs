@@ -106,7 +106,7 @@ public class UIACTCard : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        _manager.IsHolding = false;
+        //_manager.IsHolding = false;
 
         SetAction();
 

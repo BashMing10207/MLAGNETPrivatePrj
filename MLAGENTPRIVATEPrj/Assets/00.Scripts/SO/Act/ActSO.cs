@@ -39,6 +39,16 @@ public abstract class ActSO : ScriptableObject
 
     public int SkillNeedPower = 1;
 
+    public int CurrentSkillCoolDown = 0;
+    public int CurrentDurability = 0;
+
+    public bool Destroyable = false;
+    public bool IsCoolDown = false;
+
+    protected IInventoryable _owningInventory;
+
+    public EActInteractiveType InteractiveType;
+
     protected GetCompoParent _parent;
 
     [SerializeField]
@@ -52,6 +62,11 @@ public abstract class ActSO : ScriptableObject
     public virtual void Init(GetCompoParent entity)
     {
         _parent = entity;
+    }
+
+    public virtual void Init(IInventoryable inventory)
+    {
+        _owningInventory = inventory;
     }
 
     public void EnableActExable(bool enable)
@@ -70,6 +85,26 @@ public abstract class ActSO : ScriptableObject
     }
 
     public abstract void RunAct(Vector3 dir, GetCompoParent agent);
+
+    public virtual void EndAct(GetCompoParent agent)
+    {
+        CurrentSkillCoolDown = SKillCoollDown;
+        CurrentDurability--;
+        if(CurrentDurability <=0)
+        {
+            RemoveInventory();
+            DestroyAct();
+        }
+    }
+
+    public virtual void RemoveInventory()
+    {
+        _owningInventory.RemoveSkillorItem(this);
+    }
+    public virtual void DestroyAct()
+    {
+        Debug.Log("뿌라지는 것을 구현하십시오!");
+    }
 
     protected float PlayerANDAgentStat(GetCompoParent agent)
     {

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class SkillAnimator : MonoBehaviour,IGetCompoable,IAfterInitable
@@ -7,6 +8,9 @@ public class SkillAnimator : MonoBehaviour,IGetCompoable,IAfterInitable
     private Animator _anim;
     private GetCompoParent _agent;
 
+    public UnityAction RealSkillAction; // c# is suck... so Method pointer is not useable TT
+    public UnityAction EndSkillAction;
+    protected Transform _targetTrm;
     public void Initialize(GetCompoParent entity)
     {
         _agent = entity;
@@ -15,7 +19,12 @@ public class SkillAnimator : MonoBehaviour,IGetCompoable,IAfterInitable
 
     public void AfterInit()
     {
-        _agent.GetCompo<AgentManager>(true).ActionExcutor += SetAnimPowerValue;
+        //_agent.GetCompo<AgentManager>(true).ActionExcutor += SetAnimPowerValue;
+    }
+
+    private void Update()
+    {
+        SetPos(_targetTrm);
     }
 
     public void SetPos(Transform trm)
@@ -41,5 +50,18 @@ public class SkillAnimator : MonoBehaviour,IGetCompoable,IAfterInitable
         _anim.SetFloat("Value",dir.magnitude);
     }
 
-
+    public void RealSkillRun()
+    {
+        RealSkillAction.Invoke();
+    }
+    public void EndSkill()
+    {
+        EndSkillAction.Invoke();
+        RealSkillAction=null;
+        EndSkillAction=null;
+    }
+    public void SetTargetTrm(Transform trm)
+    {
+        _targetTrm = trm;
+    }
 }

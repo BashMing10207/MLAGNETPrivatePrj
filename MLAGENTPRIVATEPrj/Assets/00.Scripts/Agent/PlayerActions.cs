@@ -19,7 +19,7 @@ public class PlayerActions : MonoBehaviour, IGetCompoable,IAfterInitable
     //[SerializeField]
     //private LayoutGroup _layoutGroup;
 
-    private Player _parent;
+    private UserPlayer _parent;
 
     private PlayerAgentManager _agentManager;
 
@@ -42,7 +42,7 @@ public class PlayerActions : MonoBehaviour, IGetCompoable,IAfterInitable
     public bool IsOnPointer { get; private set; } = false;
     public void Initialize(GetCompoParent entity)
     {
-        _parent = entity as Player;
+        _parent = entity as UserPlayer;
 
         for (int i = 0; i < _cardParents.Count; i++)
         {
@@ -111,7 +111,7 @@ public class PlayerActions : MonoBehaviour, IGetCompoable,IAfterInitable
     public void SetAction(int type, int idx)
     {
 
-
+        Debug.LogWarning("Fix!!! this is Wrong!");
         _skillAnimator.SetAnim(_cards[type][idx].Act.HashValue);
         _cards[_currentActType][_currentActIdx].OutLineHandle(false);
 
@@ -173,7 +173,7 @@ public class PlayerActions : MonoBehaviour, IGetCompoable,IAfterInitable
             if (_itemManager.Items.Count > 0)
             {
                 
-                _itemManager.Items.RemoveAt(_currentActIdx);
+                //_itemManager.Items.RemoveAt(_currentActIdx);
                 //List<ActSO> unitOwnList = _agentManager.SelectedUnit().GetCompo<ItemManager>().Items;
 
                 for (int j = 0; j < _cards[_currentActType].Count; j++)

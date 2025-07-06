@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Health : MonoBehaviour, IGetDamageable,IGetCompoable
+public class Health : MonoBehaviour, IGetDamageable,IGetCompoable,IAfterInitable
 {
     public float MaxHealth, CurrentHealth;
 
@@ -34,4 +34,11 @@ public class Health : MonoBehaviour, IGetDamageable,IGetCompoable
         }
     }
 
+    public void AfterInit()
+    {
+        if(Owner.GetCompo<UnitDeadEvent>())
+        {
+
+        }
+    }
 }

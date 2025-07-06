@@ -12,4 +12,9 @@ public class MultiActSO : ActSO
             act.RunAct(dir, agent);
         }
     }
+    public override void EndAct(GetCompoParent agent)
+    {
+        foreach(ActSO act in _acts)
+            { act.EndAct(agent); }
+    }
 }

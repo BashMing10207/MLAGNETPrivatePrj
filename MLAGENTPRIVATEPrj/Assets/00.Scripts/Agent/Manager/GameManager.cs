@@ -12,25 +12,34 @@ public class GameManager : GetCompoParent //Manager<GameManager>
 
     public List<GetCompoParent> PlayerManagerCompos = new List<GetCompoParent>();
     //public EnemyManager EnemyManagerCompo;
-    public GetCompoParent PlayerManagerCompo => PlayerManagerCompos[_isPlayerturn ? 0:1];
+    //public GetCompoParent PlayerManagerCompo => PlayerManagerCompos[_isPlayerturn ? 0:1];
+    public GetCompoParent CurrentClientPlayerManagerCompo; // CurrentPlayer <= you
 
     public event Action OnTwoTurnEndEvent,OnTurnEndEvent;
     public static GameManager Instance;
 
     public PlayerInputSO PlayerInputSO;
-protected override void Awake()
+    protected override void Awake()
     {
+        //if(Instance != null)
+        //    Destroy(Instance);
+
         Instance = this;
         base.Awake();
         OnTurnEnd += TurnEnd;
     }
 
+    public void AddPlayer(Player player)
+    {
+        PlayerManagerCompos.Add(player);
+    }
+
     [ContextMenu("TurnChange")]
     private void TurnEnd()
     {
-        PlayerManagerCompo.gameObject.SetActive(false);
+        CurrentClientPlayerManagerCompo.gameObject.SetActive(false);
         _isPlayerturn = !_isPlayerturn;//턴넘기기
-        PlayerManagerCompo.gameObject.SetActive(true);
+        CurrentClientPlayerManagerCompo.gameObject.SetActive(true);
         OnTurnEndEvent?.Invoke();
 
         if(_isPlayerturn)

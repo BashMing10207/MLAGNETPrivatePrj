@@ -53,7 +53,7 @@ Material:
     - _Cull: 2
     - _DstBlend: 0
     - _Metallic: 0
-    - _Ming: 25
+    - _Ming: 15
     - _Normal: 0.92
     - _Power: 3
     - _Power2: 15

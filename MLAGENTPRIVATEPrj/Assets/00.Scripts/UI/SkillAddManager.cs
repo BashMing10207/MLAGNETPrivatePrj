@@ -22,8 +22,8 @@ public class SkillAddManager : MonoBehaviour, IGetCompoable
 
     public void AddAction(ActSO act)
     {
-        _getCompoParent.PlayerManagerCompo.GetCompo<SkillAdder>().AddAddList(act);
-        _getCompoParent.PlayerManagerCompo.GetCompo<PlayerActions>().Init();
+        _getCompoParent.CurrentClientPlayerManagerCompo.GetCompo<SkillAdder>().AddAddList(act);
+        _getCompoParent.CurrentClientPlayerManagerCompo.GetCompo<PlayerActions>().Init();
     }
 
     private void OnEnable()

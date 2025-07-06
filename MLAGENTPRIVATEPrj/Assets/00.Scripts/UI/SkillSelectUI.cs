@@ -85,7 +85,7 @@ public class SkillSelectUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     }
     public void SetAction()
     {
-        _parent.PlayerManagerCompo.GetCompo<ItemManager>().Items.Add(Act);
+        _parent.CurrentClientPlayerManagerCompo.GetCompo<ItemManager>().Items.Add(Act);
         _parent.GetCompo<SkillAddManager>().AddAction(Act);
     }
     public void OnPointerDown(PointerEventData eventData)

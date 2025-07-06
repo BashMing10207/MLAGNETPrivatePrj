@@ -2,17 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemManager : MonoBehaviour, IGetCompoable
+public class ItemManager : GetableCoponentBase, IInventoryable
 {
-    protected GetCompoParent _parent;
 
     public List<ActSO> Items = new();
 
     public List<ActSO> Skills = new();
 
-    public void Initialize(GetCompoParent entity)
+    public int MaxItemIdx = 5;
+    public int MaxSkillIdx = 5;
+
+    public override void Initialize(GetCompoParent entity)
     {
-        _parent = entity;
+        Parent = entity;
     }
 
 
@@ -21,6 +23,57 @@ public class ItemManager : MonoBehaviour, IGetCompoable
 
     }
 
+    public bool AddItem(ActSO act)
+    {
+        if (act == null)
+        {
+            Debug.LogAssertion("가방에 뭘 넣는거노 이기야");
+            return false;
+        }
+        if (MaxItemIdx < Items.Count + 1)
+            return false;
+
+        Items.Add(act);
+
+        return true;
+    }
+
+    public bool AddSkill(ActSO act)
+    {
+        if (act == null)
+        {
+            Debug.LogAssertion("왜 21호도 안하는 존재하지 않는 것을 배우는 거노.. 이기야");
+            return false;
+        }
+        if (MaxItemIdx < Skills.Count + 1)
+            return false;
+
+        Skills.Add(act);
+
+
+        return true;
+    }
+
+    public void RemoveSkill(ActSO act)
+    {
+        if (act == null)
+        {
+            Debug.LogAssertion("null을 삭제하기 ㅎㅎ ㅗ");
+            return;
+        }
+        if(Skills.Contains(act))
+        Skills.Remove(act);
+    }
+    public void RemoveItem(ActSO act)
+    {
+        if (act == null)
+        {
+            Debug.LogAssertion("null을 삭제하기 ㅎㅎ ㅗ");
+            return;
+        }
+        if (Skills.Contains(act))
+            Items.Remove(act);
+    }
     public void Start()
     {
         
@@ -31,6 +84,9 @@ public class ItemManager : MonoBehaviour, IGetCompoable
 
     }
 
-
-
+    public void RemoveSkillorItem(ActSO act)
+    {
+        RemoveItem(act);
+        RemoveSkill(act);
+    }
 }

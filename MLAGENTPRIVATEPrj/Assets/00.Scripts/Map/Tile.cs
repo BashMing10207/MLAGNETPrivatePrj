@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Tile : DamageCaster
@@ -15,6 +14,8 @@ public class Tile : DamageCaster
 
     [SerializeField]
     private Collider _collider;
+
+    public MeshFilter GetMeshFilter() {return _meshfilter; }
 
     private void Awake()
     {

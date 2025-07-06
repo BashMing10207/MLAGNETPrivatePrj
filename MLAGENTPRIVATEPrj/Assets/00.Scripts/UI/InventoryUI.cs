@@ -147,7 +147,7 @@ public class InventoryUI : MonoBehaviour,IGetCompoable,IAfterInitable
         _selectedUICard?.OutLineHandle(false);
 
         //_actCommander.SetAct(_cards[type][idx].Act);
-        _agentActCommander.CurrentAct = uicard.Act;
+        _agentActCommander.SetCurrentAct(uicard.Act);
         uicard.OutLineHandle(true);
         _selectedUICard = uicard;
 
@@ -202,7 +202,7 @@ public class InventoryUI : MonoBehaviour,IGetCompoable,IAfterInitable
         if (_itemManager.Items.Count > 0)
         {
 
-            _itemManager.Items.RemoveAt(_currentActIdx);
+            //_itemManager.Items.RemoveAt(_currentActIdx);
             //List<ActSO> unitOwnList = _agentManager.SelectedUnit().GetCompo<ItemManager>().Items;
 
             for (int j = 0; j < _cards[_currentActType].Count; j++)
@@ -237,7 +237,7 @@ public class InventoryUI : MonoBehaviour,IGetCompoable,IAfterInitable
         if (_itemManager.Items.Count <= 0)
         {
             //_actCommander.CurrentAct = null;
-            _agentActCommander.CurrentAct = null;
+            _agentActCommander.SetCurrentAct(null);
         }
     }
 }

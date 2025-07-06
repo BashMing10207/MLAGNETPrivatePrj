@@ -19,6 +19,6 @@ public class CamFollower : MonoBehaviour
 
     private void ResetCam()
     {
-        GameManager.Instance.PlayerManagerCompo.GetCompo<CameraManager>().SetVCamTarget(GameManager.Instance.PlayerManagerCompo.GetCompo<AgentManager>(true).SelectedUnit().ViewPivot); //겟콤포 트루로 가져오는 것은 매우 비윤리적인....
+        GameManager.Instance.CurrentClientPlayerManagerCompo.GetCompo<CameraManager>().SetVCamTarget(GameManager.Instance.CurrentClientPlayerManagerCompo.GetCompo<AgentManager>(true).SelectedUnit().ViewPivot); //겟콤포 트루로 가져오는 것은 매우 비윤리적인....
     }
 }

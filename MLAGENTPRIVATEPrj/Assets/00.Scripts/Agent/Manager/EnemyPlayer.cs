@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyPlayer : GetCompoParent
+public class EnemyPlayer : Player
 {
    
 }
