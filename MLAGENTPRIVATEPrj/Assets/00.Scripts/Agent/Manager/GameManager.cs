@@ -100,6 +100,10 @@ public class GameManager : GetCompoParent //Manager<GameManager>
         CurrentClientPlayerManagerCompo.gameObject.SetActive(false);
         _isPlayerturn = !_isPlayerturn;//턴넘기기
         CurrentClientPlayerManagerCompo.gameObject.SetActive(true);
+
+        CurrentActiveUnitIndex = (CurrentActiveUnitIndex+1) % Units.Count;
+        CurrenActivetUnit().GetCompo<AgentController>(true).GetTurn();
+
         OnTurnEndEvent?.Invoke();
 
         if(_isPlayerturn)

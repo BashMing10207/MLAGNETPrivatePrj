@@ -1,14 +1,8 @@
 using UnityEngine;
 
-public class AgentController : GetableCoponentBase, IAfterInitable
+public abstract class AgentController : GetableCoponentBase
 {
-    public void AfterInit()
-    {
-        
-    }
 
-    public void GetTurn()
-    {
+    public abstract void GetTurn();
 
-    }
 }
