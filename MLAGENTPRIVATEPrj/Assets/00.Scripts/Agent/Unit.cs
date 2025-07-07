@@ -13,6 +13,8 @@ public class Unit : Agent
 
     public AgentController Controller;
 
+    public StatManager UnitStat; //모든 유닛에게 존재하며 캐싱하는 편이 최적화에 도움이 된다고 판단하였음.
+
     protected List<IAgentDieEvent> AgentDieEventList = new();
 
     protected override void Awake()
@@ -24,6 +26,7 @@ public class Unit : Agent
 
         base.Awake();
         AgentDieEventList.AddRange(GetComponentsInChildren<IAgentDieEvent>(true));
+        UnitStat = GetComponentInChildren<StatManager>(true);
     }
 
     public void Init(GetCompoParent masterController)

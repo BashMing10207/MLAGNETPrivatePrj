@@ -126,6 +126,10 @@ public class UnitActInteractive : MonoBehaviour, IGetCompoable, IAfterInitable
         {
             _aimLineRenderer.LineRender();
         }
+        else
+        {
+            _aimLineRenderer.DisableLinRender();
+        }
     }
 
 #region Drag

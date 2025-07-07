@@ -42,7 +42,7 @@ public class ItemManager : GetableCoponentBase, IInventoryable
     {
         if (act == null)
         {
-            Debug.LogAssertion("왜 21호도 안하는 존재하지 않는 것을 배우는 거노.. 이기야");
+            Debug.LogAssertion(" 이기야");
             return false;
         }
         if (MaxItemIdx < Skills.Count + 1)

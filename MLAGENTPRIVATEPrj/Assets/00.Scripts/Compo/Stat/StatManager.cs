@@ -16,9 +16,13 @@ public class StatManager : MonoBehaviour,IGetCompoable
     private List<SetablePair<StatSO,int>> _modifierDeleteList = new List<SetablePair<StatSO, int>>();
     protected GetCompoParent _parent;
 
+    //스텟은 어찌되었든 고정인데, 굳이 SO로 하여야 할까?
+    
     public void Initialize(GetCompoParent entity)
     {
         _parent = entity;
+
+        
     }
 
     public void Init()

@@ -32,6 +32,11 @@ public class AimLineRenderer : MonoBehaviour, IGetCompoable,IAfterInitable
     //    }
     //}
 
+    public void DisableLinRender()
+    {
+        _lineRenderer.enabled = false;
+    }
+
     public void LineRender()
     {
         //if(Physics.Raycast(Camera.main.ViewportPointToRay(_playerManager.PostMousePos),out RaycastHit hit))
